@@ -38,7 +38,7 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
         server: {
             baseDir: '_site'
         },
-        notify: true
+        notify: false
     });
 });
 
@@ -49,7 +49,8 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
  gulp.task('sass', function() {
     gulp.src('assets/**/*.sass')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('_site/assets'));
+        .pipe(gulp.dest('_site/assets'))
+        .pipe(browserSync.reload({stream:true}));
 });
 // gulp.task('sass', function () {
 //     return gulp.src('assets/**/*.sass')
@@ -71,7 +72,8 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
 gulp.task('jade', function() {
     return gulp.src('_jadefiles/*.jade')
     .pipe(jade())
-    .pipe(gulp.dest('_includes'));
+    .pipe(gulp.dest('_includes'))
+    .pipe(browserSync.reload({stream:true}));
 });
 
 
